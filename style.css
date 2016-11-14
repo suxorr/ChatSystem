@@ -12,11 +12,13 @@ body{
     background: white;
     margin: 0 auto;
     padding: 20px;
+    overflow: hidden;
 }
 
 #chat_box{
     width: 90%;
     height: 400px;
+    overflow: hidden;
 
 }
 input[type='text'], input[type='submit'],textarea{
@@ -31,4 +33,21 @@ input[type='text'], input[type='submit'],textarea{
     padding: 5px;
     margin-bottom: 5px;
     border-bottom: 1px solid silver;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+#chat-data span:nth-child(1){
+    color: green;
+}
+
+
+#chat-data span:nth-child(2){
+    color: rebeccapurple;
+}
+
+#chat-data span:nth-child(3){
+    color: blue;
+    float: right;
+    clear: both;
 }

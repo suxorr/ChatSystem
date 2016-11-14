@@ -1,3 +1,8 @@
+<?php
+require_once 'DB.php';
+require_once 'formatDate.php';
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,22 +12,52 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Chat system with php</title>
 	<link rel="stylesheet" href="style.css">
+	<script>
+		function ajax() {
+			
+		var request = new XMLHttpRequest();
+		
+		request.onreadystatechange = function(){
+			if(request.readyState == 4 && request.status == 200){
+				
+				document.getElementById('chat').innerHTML = request.responseText;
+			}
+		}
+		request.open('GET','chat.php',true);
+		request.send();
+		}
+		setInterval(function(){ajax()},1000);
+	</script>
 </head>
-<body>
+<body onload="ajax();">
 	<div id="container">
 		<div id="chat_box">
-			<div id="chat-data">
-				<span>Wally :</span>
-				<span>How are you ?</span>
-				<span>12:39 PM</span>
+			<div id="chat">
+				
 			</div>
 		</div>
 		
 		<form action="" method="post">
 			<input type="text" name="name" placeholder="Your name">
-			<textarea name="enter message" id="" cols="30" rows="10" placeholder="Enter your message here"></textarea>
+			<textarea name="message" id="" cols="30" rows="10" placeholder="Enter your message here"></textarea>
 			<input type="submit" value="Send it" name="submit">
 		</form>
+		
+		<?php
+		if(isset($_POST['submit'])){
+			$name = $_POST['name'];
+			$message = $_POST['message'];
+			
+			$query = "INSERT INTO chat(name, message) VALUES('{$name}', '{$message}')";
+			
+			$result = $conn->query($query);
+			if($result){
+				
+			}
+			
+		}
+		
+		?>
 	</div>
 </body>
 </html>
